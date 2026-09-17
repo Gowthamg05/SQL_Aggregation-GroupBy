@@ -1,0 +1,128 @@
+-- Q11. Find customers who have placed more than 1 order.
+-- Display:
+-- CustomerID
+-- TotalOrders
+
+select 
+customerid,
+count(orderid)as morethan_1_orders
+from sales.orders
+group by customerid
+having count(orderid)>1
+/*
+-- Q12. Find customers whose total sales are greater than 50.
+-- Display:
+-- CustomerID
+-- TotalSales*/
+
+select 
+customerid,
+sum(sales)as tot_sales_50
+from sales.orders
+group by customerid
+having sum(sales)>50
+
+/*  -- Q13. Find products whose total quantity sold is greater than 2.
+-- Display:
+-- ProductID
+-- TotalQuantity*/
+
+select * from sales.orders
+
+select 
+productid,
+sum(quantity) as tot_quantity
+from sales.orders
+group by productid
+having sum(quantity)>2
+
+/* -- Q14. Find salespersons whose total sales are greater than 100.
+-- Display:
+-- SalesPersonID
+-- TotalSales*/
+
+select
+salespersonid,
+sum(sales)as tot_sales
+from sales.orders
+group by SalesPersonID
+having  sum(sales)>100
+
+/* -- Q15. Find departments where the average employee salary
+-- is greater than 60000.
+-- Display:
+-- Department
+-- AverageSalary*/
+
+select department,
+avg(salary)as avg_salary
+from sales.Employees
+group by department
+having avg(salary)>60000
+
+/* -- Q16. Find departments that contain more than 2 employees.
+-- Display:
+-- Department
+-- EmployeeCount */
+
+select department,
+count(employeeid)
+from sales.employees
+group by department
+having count(employeeid)>2
+
+/* -- Q17. Find customers whose highest single order value
+-- is greater than 50.
+-- Display:
+-- CustomerID
+-- MaxOrderSales */
+
+select customerid,
+max(sales) as max_order_sales
+from sales.orders
+group by customerid
+having max(sales)>50
+
+/* -- Q18. Find products whose average order sales is greater than 30.
+-- Display:
+-- ProductID
+-- AverageSales */
+
+select 
+productid,
+avg(sales) as avg_sales
+from sales.orders
+group by productid
+having avg(sales)>30
+
+-- Q19. Find customers whose total quantity purchased is greater than 3.
+-- Display:
+-- CustomerID
+-- TotalQuantity
+
+select
+customerid,
+sum(quantity) as tot_quantity
+from sales.orders
+group by customerid
+having sum(quantity)>3
+
+-- Q20. Find product categories where total sales
+-- are greater than 50.
+--
+-- Tables:
+-- sales.orders
+-- sales.products
+--
+-- Display:
+-- Category
+-- TotalSales
+
+select 
+p.category,
+sum(o.sales)as tot_sales
+from sales.orders o
+inner join sales.products p
+on o.ProductID=p.ProductID
+group by p.Category
+having sum(o.sales)> 50
