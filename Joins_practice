@@ -1,0 +1,118 @@
+
+-- Q21. Display each order along with the customer's:
+-- FirstName
+-- LastName
+-- OrderID
+-- Sales
+
+select
+c.firstname,
+c.lastname,
+o.orderid,
+o.sales
+from sales.orders o
+ join
+sales.customers c
+on c.customerid=o.customerid
+
+-- Q22. Display:
+-- OrderID
+-- Product name
+-- Category
+-- Quantity
+-- Sales
+
+select p.productid,
+o.orderid,
+p.product,
+p.category,
+o.quantity,
+o.sales
+from sales.orders o
+inner join sales.products p
+on p.productid=o.productid
+
+-- Q23. Display each order along with the salesperson's:
+-- FirstName
+-- LastName
+-- OrderID
+-- Sales
+
+select 
+c.firstname,
+c.lastname,
+o.orderid,
+o.sales,
+o.SalesPersonID
+from sales.employees c
+left join
+sales.orders o
+on c.employeeid=o.customerid
+
+-- Q24. Display a complete order-level report containing:
+-- Customer name
+-- Product name
+-- Category
+-- Quantity
+-- Sales
+-- OrderDate
+
+select  * from sales.employees
+
+select
+c.firstname,
+p.product,
+p.category,
+o.quantity,
+o.sales,
+o.orderdate
+from sales.customers c
+inner join sales.orders o
+on c.customerid=o.customerid
+inner join sales.products p
+on p.ProductID=o.productid
+
+-- Q25. Display each customer's:
+-- CustomerID
+-- FirstName
+-- LastName
+-- TotalSales
+--
+-- Include customers even if they have never placed an order.
+
+select 
+c.customerid,
+c.firstname,
+c.lastname,
+sum(o.sales)as tot_sales
+from sales.customers c
+left join sales.orders o
+on c.customerid=o.customerid
+
+-- Q26. Display every employee along with their manager's name.
+--
+-- Display:
+-- EmployeeName
+-- ManagerName
+
+select 
+firstname,
+managerid
+from sales.employees
+where managerid is null
+
+-- Q28. Find customers who have never placed an order.
+-- Display:
+-- CustomerID
+-- FirstName
+-- LastName
+
+select 
+c.customerid,
+c.firstname,
+c.lastname,o.orderid
+from sales.orders o
+ join
+sales.customers c
+on o.customerid=c.customerid
+where o.orderid is not null
